@@ -1,3 +1,4 @@
+import moment from 'moment';
 
 import './App.css';
 
@@ -21,9 +22,17 @@ function App() {
   
   const sprint = `${result[0]}_${result[1]%2===0 ? result[1]: result[1]+1}`;
 
+  const dateStartStr = moment().isoWeek(result[1]%2===0 ? result[1]-1: result[1]).startOf("isoWeek").format("DD/MM/YYYY");
+  const dateEndStr = moment().isoWeek(result[1]).endOf("isoWeek").day(-2).format("DD/MM/YYYY");
+
   return (
     <div className="App">
      <h1>{sprint}</h1>
+     <div className="dates">
+       <div className="date-start">{dateStartStr}</div>
+       <div className="separator"> - </div>
+       <div className="date-end">{dateEndStr}</div>
+     </div>
     </div>
   );
 }
