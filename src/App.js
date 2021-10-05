@@ -22,8 +22,15 @@ function App() {
   
   const sprint = `${result[0]}_${result[1]%2===0 ? result[1]: result[1]+1}`;
 
-  const dateStartStr = moment().isoWeek(result[1]%2===0 ? result[1]-1: result[1]).startOf("isoWeek").format("DD/MM/YYYY");
-  const dateEndStr = moment().isoWeek(result[1]).endOf("isoWeek").day(-2).format("DD/MM/YYYY");
+  const dateStart = moment().isoWeek(result[1]%2===0 ? result[1]-1: result[1]).startOf("isoWeek");
+  const dateEnd = moment().isoWeek(result[1]).endOf("isoWeek").day(-2);
+
+  const dateStartStr = dateStart.format("DD/MM/YYYY");
+  const dateEndStr = dateEnd.format("DD/MM/YYYY");
+
+  const daysToEnd = dateEnd.diff(moment(), "days");
+
+  
 
   return (
     <div className="App">
@@ -32,6 +39,9 @@ function App() {
        <div className="date-start">{dateStartStr}</div>
        <div className="separator"> - </div>
        <div className="date-end">{dateEndStr}</div>
+     </div>
+     <div className={`days-to-end days-${daysToEnd}`}>
+       Días hasta finalización del sprint: {daysToEnd}
      </div>
     </div>
   );
