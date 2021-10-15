@@ -18,12 +18,12 @@ function App() {
       return [`${d.getFullYear()}`.slice(2), weekNo];
   }
 
-  var result = getWeekNumber(new Date());
+  var  [fullYear, weekNumber] = getWeekNumber(new Date());
   
-  const sprint = `${result[0]}_${result[1]%2===0 ? result[1]: result[1]+1}`;
+  const sprint = `${fullYear}_${weekNumber%2===0 ? weekNumber: weekNumber+1}`;
 
-  const dateStart = moment().isoWeek(result[1]%2===0 ? result[1]-1: result[1]).startOf("isoWeek");
-  const dateEnd = moment().isoWeek(result[1]).endOf("isoWeek").day(-2);
+  const dateStart = moment().isoWeek(weekNumber%2===0 ? weekNumber-1: weekNumber).startOf("isoWeek");
+  const dateEnd = moment().isoWeek(weekNumber%2===0 ? weekNumber: weekNumber+1).endOf("isoWeek").day(-2);
 
   const dateStartStr = dateStart.format("DD/MM/YYYY");
   const dateEndStr = dateEnd.format("DD/MM/YYYY");
